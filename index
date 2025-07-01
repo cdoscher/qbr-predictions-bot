@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coder Sales Team Future Predictions Bot 🔮</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4ecdc4;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+        }
+
+        .predict-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .predict-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .predict-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .prediction-result {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 15px;
+            border-left: 4px solid #4ecdc4;
+            display: none;
+        }
+
+        .prediction-text {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .prediction-category {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #4ecdc4;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🔮</div>
+        <h1>Future Predictions Bot</h1>
+        <div class="subtitle">Coder Sales Team Q4 2025 Crystal Ball</div>
+        
+        <form id="predictionForm">
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="role">Your Role:</label>
+                <select id="role" name="role" required>
+                    <option value="">Select your role</option>
+                    <option value="Account Executive">Account Executive</option>
+                    <option value="Sales Development Rep">Sales Development Rep (SDR)</option>
+                    <option value="Sales Manager">Sales Manager</option>
+                    <option value="Customer Success">Customer Success</option>
+                    <option value="Sales Engineer">Sales Engineer</option>
+                    <option value="Business Development">Business Development</option>
+                    <option value="Sales Operations">Sales Operations</option>
+                    <option value="Other">Other Sales Role</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="predict-btn" id="predictBtn">
+                🔮 Reveal My Future 🔮
+            </button>
+        </form>
+        
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Consulting the crystal ball...</p>
+        </div>
+        
+        <div class="prediction-result" id="predictionResult">
+            <div class="prediction-text" id="predictionText"></div>
+            <div class="prediction-category" id="predictionCategory"></div>
+        </div>
+        
+        <div class="footer">
+            Made with ❤️ for the Coderites • LFG! 🚀
+        </div>
+    </div>
+
+    <script src="predictions.js"></script>
+</body>
+</html>
